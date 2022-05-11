@@ -1,12 +1,10 @@
 -- CreateTable
 CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
-    "name" TEXT,
+    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "cpf" INTEGER NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -14,8 +12,6 @@ CREATE TABLE "user" (
 -- CreateTable
 CREATE TABLE "endereco" (
     "id" SERIAL NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
     "endereco" TEXT NOT NULL,
     "bairro" TEXT NOT NULL,
     "numero" INTEGER NOT NULL,
@@ -43,10 +39,16 @@ CREATE TABLE "estado" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "user_name_key" ON "user"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_cpf_key" ON "user"("cpf");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "endereco_user_id_key" ON "endereco"("user_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "cidade_cidade_key" ON "cidade"("cidade");
