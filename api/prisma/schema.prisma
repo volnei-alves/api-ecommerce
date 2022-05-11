@@ -27,7 +27,8 @@ model Endereco {
     numero    Int      
     user_id   Int
     user      User    @relation(fields: [user_id], references: [id])
-    cidade  Cidade?    
+    cidade      Cidade   @relation(fields: [cidade_id], references: [id])
+    cidade_id   Int  
 
     @@map("endereco")
 }
@@ -35,9 +36,9 @@ model Endereco {
 model Cidade{
   id          Int         @id @default(autoincrement())
   cidade      String      @unique
-  endereco_id   Int
-  endereco    Endereco    @relation(fields: [endereco_id], references: [id])
-  estaddo Estado?  
+  endereco    Endereco[]
+  estado      Estado   @relation(fields: [estado_id], references: [id])
+  estado_id   Int
 
   @@map("cidade")
 }
@@ -45,8 +46,7 @@ model Cidade{
 model Estado{
   id          Int      @id @default(autoincrement())
   estado_name String   @unique
-  cidade      Cidade   @relation(fields: [cidade_id], references: [id])
-  cidade_id   Int
+  cidade      Cidade[]
 
   @@map("estado")
 }
