@@ -1,21 +1,16 @@
-import { Router, Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { Router } from "express";
 
-const prisma = new PrismaClient();
+import { addUser } from "../controller/userController/addUser";
+import { getUserId } from "../controller/userController/getUserId";
+import { getUsersAll } from "../controller/userController/getUsersAll";
 
 const router = Router();
 
-router.get("/", async (req: Request, res: Response) => {
-    res.send('get users all');
-});
 
-router.get("/:id", async (req: Request, res: Response) => {
-    const user = await prisma.user.findUnique({ where: { id: Number(req.params.id) } });
-    res.send(user);
-});
+router.get("/", getUsersAll);
 
-router.post("/", async (req: Request, res: Response) => {
-    res.send("sign-up user");
-});
+router.get("/:id", getUserId);
+
+router.post("/", addUser);
 
 export default router;
