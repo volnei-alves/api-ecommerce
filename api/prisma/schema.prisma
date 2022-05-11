@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+    id        Int      @default(autoincrement()) @id
+    name      String  @unique
+    email     String   @unique
+    cpf       Int      @unique 
+    password  String
+    endereco Endereco?
+
+    @@map("user")
+}
+  
+model Endereco {
+    id        Int      @id @default(autoincrement())
+    endereco  String
+    bairro    String
+    numero    Int      
+    user_id   Int
+    user      User    @relation(fields: [user_id], references: [id])
+    cidade  Cidade?    
+
+    @@map("endereco")
+}
+
+model Cidade{
+  id          Int         @id @default(autoincrement())
+  cidade      String      @unique
+  endereco_id   Int
+  endereco    Endereco    @relation(fields: [endereco_id], references: [id])
+  estaddo Estado?  
+
+  @@map("cidade")
+}
+
+model Estado{
+  id          Int      @id @default(autoincrement())
+  estado_name String   @unique
+  cidade      Cidade   @relation(fields: [cidade_id], references: [id])
+  cidade_id   Int
+
+  @@map("estado")
+}

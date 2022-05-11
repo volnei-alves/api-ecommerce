@@ -1,0 +1,31 @@
+{
+    "name": "api-ecommerce",
+    "version": "1.0.0",
+    "main": "api/server.ts",
+    "scripts": {
+        "start": "nodemon ./api/server.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "prisma": {
+        "schema": "./api/prisma/schema.prisma"
+    },
+    "keywords": [],
+    "author": "volnei alves ferreira",
+    "license": "ISC",
+    "description": "Api ecommerce com postgresql",
+    "dependencies": {
+        "@prisma/client": "^3.14.0",
+        "@types/nodemon": "^1.19.1",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "knex": "^2.0.0",
+        "pg": "^8.7.3"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^17.0.31",
+        "nodemon": "^2.0.16",
+        "prisma": "^3.14.0",
+        "typescript": "^4.6.4"
+    }
+}
