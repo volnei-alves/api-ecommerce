@@ -10,7 +10,7 @@ datasource db {
 
 
 model User {
-    id        Int      @default(autoincrement()) @id
+    id        Int  @id   @default(autoincrement()) 
     name      String  @unique
     email     String   @unique
     cpf       Int      @unique 
